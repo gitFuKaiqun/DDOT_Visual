@@ -13,7 +13,7 @@ Tools and Environment:
 * D3.js, Highcharts 
 
 ### Map Timeline
-Front end UI is inspired from the 
+Front end UI is inspired from [Christchurch 2010 Timeline](http://bl.ocks.org/tnightingale/4718717)
 
 ### Time vs Volume
 
