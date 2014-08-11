@@ -4,7 +4,7 @@ DCDOT VDS Data Visualization Applications
 This project is dedicating on providing some state of the art visualization techniques for the transportation agencies. Such visualization techniques are user friendly and easy to use. 
 
 ## Development Environment
-This system is integrated under Flask framework. MSSQL is deployed as backend database. Tools such as Twitter Bootstrap and D3.js are utilized for front end visualization implementation. 
+This system is integrated under Flask framework. MSSQL is deployed as backend database. Tools such as Twitter Bootstrap and D3.js are utilized for front end visualization. 
 
 Tools and Environment:
 * Python Flask
