@@ -14,6 +14,9 @@ Tools and Environment:
 
 ### Map Timeline
 Front end UI is inspired from [Christchurch 2010 Timeline](http://bl.ocks.org/tnightingale/4718717)
+leaflet is used for map display and D3.js is used for timeline and data points display. 
+Screenshot:
+![alt tag](https://s3.amazonaws.com/Vis_Pics/pics/1.JPG)
 
 ### Time vs Volume
 
