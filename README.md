@@ -13,7 +13,7 @@ Tools and Environment:
 * D3.js, Highcharts 
 
 ### Map Timeline
-Front end UI is inspired from [Christchurch 2010 Timeline](http://bl.ocks.org/tnightingale/4718717). 
+Front end UI is inspired by [Christchurch 2010 Timeline](http://bl.ocks.org/tnightingale/4718717). 
 [leaflet](http://leafletjs.com/) is used for map display and [D3.js](http://d3js.org/) is used for timeline and data points display. 
 
 Screenshot:
@@ -26,10 +26,14 @@ Screenshot:
 ![alt tag](https://s3.amazonaws.com/Vis_Pics/pics/2.JPG)
 
 ### Bubble Graph
+Inspired by [Pack Hierarchy](http://mbostock.github.io/d3/talk/20111116/pack-hierarchy.html)
+
 Screenshot:
 ![alt tag](https://s3.amazonaws.com/Vis_Pics/pics/3.JPG)
 
 ### NZE
+Inspired by [New Zealand Earthquakes](http://bl.ocks.org/d3noob/4425979)
+
 Screenshot:
 ![alt tag](https://s3.amazonaws.com/Vis_Pics/pics/4.JPG)
 
@@ -37,6 +41,8 @@ Screenshot:
 
 
 ### Tree Map
+Inspired by [Treemap](http://bl.ocks.org/mbostock/4063582)
+
 Screenshot:
 ![alt tag](https://s3.amazonaws.com/Vis_Pics/pics/5.JPG)
 
