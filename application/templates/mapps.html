@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block StaticFiles %}
+    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet-src.js"></script>
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/1.0.0-rc.3/lodash.underscore.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/colorbrewer.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/leaflet.points-layer.js') }}"></script>
+{% endblock %}
+
+{% block BodyContent %}
+    <style type="text/css">
+    #map {
+        height: 365px;
+        width: 900px;
+        margin-bottom: 1em;
+    }
+    .leaflet-popup-content ul {
+        padding-left: 1.5em;
+    }
+    .circle {
+        visibility: hidden;
+    }
+    .circle.selected {
+        visibility: visible;
+    }
+    svg {
+        font: 10px sans-serif;
+    }
+    .axis path, .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+    </style>
+
+    <div id='map' data-source="{{ url_for('static', filename='res/quakes_christchurch_20100901-20101001_mag-gt3.json') }}"></div>
+    <timeline></timeline>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/mapapp.js') }}"></script>
+{% endblock %}
