@@ -1,4 +1,4 @@
 DDOT_Visual
 ===========
 
-Integrated DDOT visualization applications.
+Integrated DDOT visualization applications. Map points
