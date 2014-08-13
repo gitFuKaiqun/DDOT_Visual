@@ -39,7 +39,9 @@ Screenshot:
 ![alt tag](https://s3.amazonaws.com/Vis_Pics/pics/4.JPG)
 
 ### Scatter Matrix 
+Inspired by [Scatterplot Matrix Brushing](http://bl.ocks.org/mbostock/4063663)
 
+![alt tag](https://s3.amazonaws.com/Vis_Pics/pics/6.JPG)
 
 ### Tree Map
 Inspired by [Treemap](http://bl.ocks.org/mbostock/4063582)
