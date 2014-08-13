@@ -2,6 +2,7 @@
  * Created by Kaiqun on 8/6/14.
  */
 $(function() {
+    loading_indicator_trigger();
     $.getJSON('/_high_chart', {}, function(data) {
         HighData = data.result;
         $('#container').highcharts({
@@ -56,5 +57,7 @@ $(function() {
 
             series: HighData
         });
+
+        loading_indicator_trigger();
     });
 });

@@ -25,12 +25,14 @@ var PtLayer = L.pointsLayer({}, {
     applyStyle: circle_style
 });
 
-$.getJSON("_snap_form", {}).done(function(collection) {
-    PtLayer._data = collection;
-    PtLayer.onAdd(map);
+drawMap(PtLayer, map, chart);
 
-    d3.select("timeline").datum(collection.features).call(chart);
-});
+//$.getJSON("_snap_form", {}).done(function(collection) {
+//    PtLayer._data = collection;
+//    PtLayer.onAdd(map);
+//
+//    d3.select("timeline").datum(collection.features).call(chart);
+//});
 
 //d3.select("timeline").datum(GeoJson.features).call(chart);
 
@@ -240,4 +242,17 @@ function timeseries_chart(color) {
     function no_op() {}
 
     return timeseries;
+}
+
+function drawMap(PtLayer, map, chart){
+    loading_indicator_trigger();
+
+    $.getJSON("_snap_form", {}).done(function(collection) {
+        PtLayer._data = collection;
+        PtLayer.onAdd(map);
+
+        d3.select("timeline").datum(collection.features).call(chart);
+
+        loading_indicator_trigger();
+    });
 }

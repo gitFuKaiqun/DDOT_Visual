@@ -66,7 +66,7 @@ circle.hidden {
 
 <script>
 function ui_add_corridor_selection() {
-    $.getJSON("http://10.41.20.61:10808/dataviz/datavizcgi.py?method=getcorridor", function(data) {
+    $.getJSON("_getcorridor", function(data) {
         htmlstr = "Corridor/Intersection: ";
         htmlstr += "<select id=\"target\">"
         $.each(data, function(k, v) {
@@ -114,7 +114,7 @@ function generate() {
     var eddate = $("#enddate").val();
     var dir = $("#dir").val();
 
-    var querystr = "http://10.41.20.61:10808/dataviz/datavizcgi.py?method=query_corridor_intersections&corridor_id=" + coi + "&target_plot=SMX&start_date=" + stdate + "&end_date=" + eddate + "&dir=" + dir;
+    var querystr = "_query_corridor_intersections?corridor_id=" + coi + "&target_plot=SMX&start_date=" + stdate + "&end_date=" + eddate + "&dir=" + dir;
 
     console.log(querystr);
     console.log("start loading");
