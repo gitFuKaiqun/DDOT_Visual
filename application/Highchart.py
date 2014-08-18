@@ -5,11 +5,16 @@ import datetime
 import DBConnection
 
 
-def highchartdata():
+def highchartdata(acisa, TimeString):
 	cnxn = DBConnection.connector()
 	cursor = cnxn.cursor()
 
-	cmd = 'SELECT [ACISA] ,[laneDir] ,[VolSum] ,[avg_speed] ,[data_datetime] FROM [snaps].[dbo].[vw_aggredated_volume_speed] where [ACISA]=1031 order by [data_datetime], [laneDir]'
+	StartTime = str(datetime.datetime.strptime(TimeString.split(' - ')[0], '%m/%d/%Y %I:%M %p'))
+	EndTime = str(datetime.datetime.strptime(TimeString.split(' - ')[1], '%m/%d/%Y %I:%M %p'))
+
+	#SQLcmd = "SELECT * FROM snaps.SNAPs_history WHERE Time > '" + StartTime + "' and Time < '" + EndTime + "'"
+
+	cmd = "SELECT [ACISA],[laneDir],[VolSum],[avg_speed],[data_datetime] FROM [snaps].[dbo].[vw_aggredated_volume_speed] where [ACISA]=" + str(acisa) + " and [data_datetime]> '" + StartTime + "' and [data_datetime] < '" + EndTime + "'" + " order by [data_datetime], [laneDir]"
 
 	cursor.execute(cmd)
 	MainDict = {}

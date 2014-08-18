@@ -1,9 +1,14 @@
 /**
  * Created by Kaiqun on 8/6/14.
  */
-$(function() {
+function generateChart() {
+    var TRange = document.getElementById("reservationtime").value;
+    var AcisaNo = document.getElementById("slct_acisa").value;
+
+    var urlStr = '/_high_chart?TRange=' + TRange + '&AcisaNo=' + AcisaNo;
+
     loading_indicator_trigger();
-    $.getJSON('/_high_chart', {}, function(data) {
+    $.getJSON(urlStr, {}, function(data) {
         HighData = data.result;
         $('#container').highcharts({
             chart: {
@@ -60,4 +65,4 @@ $(function() {
 
         loading_indicator_trigger();
     });
-});
+}

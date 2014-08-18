@@ -5,16 +5,19 @@ import math
 import DBConnection
 
 
-def SNAPS_Former():
+def SNAPS_Former(TimeString):
 	#StartTime = str(datetime.strptime(TimeRange.split(' - ')[0], '%m/%d/%Y %I:%M %p'))
 	#EndTime = str(datetime.strptime(TimeRange.split(' - ')[1], '%m/%d/%Y %I:%M %p'))
 
 	cnxn = DBConnection.connector()
 	cursor = cnxn.cursor()
 
+	StartTime = str(datetime.strptime(TimeString.split(' - ')[0], '%m/%d/%Y %I:%M %p'))
+	EndTime = str(datetime.strptime(TimeString.split(' - ')[1], '%m/%d/%Y %I:%M %p'))
+
 	#cmd = "SELECT [snaps].[dbo].[vw_aggredated_volume_speed].[ACISA],SUM([VolSum]) as Vol,AVG([avg_speed]) as Speed,[data_datetime],AVG([Latitude]) as Lat,AVG([Longitude]) as Lon FROM [snaps].[dbo].[vw_aggredated_volume_speed], [snaps].[dbo].[SNAPsLocation] where [snaps].[dbo].[vw_aggredated_volume_speed].[ACISA] = [snaps].[dbo].[SNAPsLocation].[ACISA] and [data_datetime] > '" + StartTime + "' and [data_datetime] < '" + EndTime + "' group by [snaps].[dbo].[vw_aggredated_volume_speed].[ACISA],[data_datetime]"
 
-	cmd = "SELECT TOP 1000 [snaps].[dbo].[vw_aggredated_volume_speed].[ACISA],SUM([VolSum]) as Vol,AVG([avg_speed]) as Speed,[data_datetime],AVG([Latitude]) as Lat,AVG([Longitude]) as Lon FROM [snaps].[dbo].[vw_aggredated_volume_speed], [snaps].[dbo].[SNAPsLocation] where [snaps].[dbo].[vw_aggredated_volume_speed].[ACISA] = [snaps].[dbo].[SNAPsLocation].[ACISA] group by [snaps].[dbo].[vw_aggredated_volume_speed].[ACISA],[data_datetime]"
+	cmd = "SELECT TOP 1000 [snaps].[dbo].[vw_aggredated_volume_speed].[ACISA],SUM([VolSum]) as Vol,AVG([avg_speed]) as Speed,[data_datetime],AVG([Latitude]) as Lat,AVG([Longitude]) as Lon FROM [snaps].[dbo].[vw_aggredated_volume_speed], [snaps].[dbo].[SNAPsLocation] where [snaps].[dbo].[vw_aggredated_volume_speed].[ACISA] = [snaps].[dbo].[SNAPsLocation].[ACISA] and [data_datetime]> '" + StartTime + "' and [data_datetime] < '" + EndTime + "'" + " group by [snaps].[dbo].[vw_aggredated_volume_speed].[ACISA],[data_datetime]"
 	cursor.execute(cmd)
 
 	MainReturnDict = {
@@ -92,3 +95,21 @@ def SNAPS_Former():
 		MainReturnDict["features"].append(initDict)
 
 	return  MainReturnDict
+
+
+def acisa_obj():
+	ReturningObj = {}
+	cnxn = DBConnection.connector()
+	cursor = cnxn.cursor()
+
+	#cmd = "SELECT [snaps].[dbo].[vw_aggredated_volume_speed].[ACISA],SUM([VolSum]) as Vol,AVG([avg_speed]) as Speed,[data_datetime],AVG([Latitude]) as Lat,AVG([Longitude]) as Lon FROM [snaps].[dbo].[vw_aggredated_volume_speed], [snaps].[dbo].[SNAPsLocation] where [snaps].[dbo].[vw_aggredated_volume_speed].[ACISA] = [snaps].[dbo].[SNAPsLocation].[ACISA] and [data_datetime] > '" + StartTime + "' and [data_datetime] < '" + EndTime + "' group by [snaps].[dbo].[vw_aggredated_volume_speed].[ACISA],[data_datetime]"
+
+	cmd = "SELECT [ACISA] FROM [snaps].[dbo].[SNAPsLocation]"
+	cursor.execute(cmd)
+
+	while 1:
+		row = cursor.fetchone()
+		if not row:
+			break
+		ReturningObj.update({str(row.ACISA): row.ACISA})
+	return ReturningObj

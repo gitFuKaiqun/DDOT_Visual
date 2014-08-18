@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import json
-from SNAP import SNAPS_Former
+from SNAP import SNAPS_Former, acisa_obj
 from Highchart import highchartdata
 import db_access
 
@@ -19,7 +19,9 @@ def mapps():
 
 @app.route('/_snap_form')
 def formSNAPs():
-	return jsonify(SNAPS_Former())
+	TimeString = request.args.get('TRange', 'Nothing', type = str)
+
+	return jsonify(SNAPS_Former(TimeString))
 
 
 @app.route('/highchart')
@@ -29,7 +31,14 @@ def hightchart():
 
 @app.route('/_high_chart')
 def hightchartData():
-	return jsonify(result = highchartdata())
+	acisa = request.args.get('AcisaNo', None, type = str)
+	TimeString = request.args.get('TRange', 'Nothing', type = str)
+	return jsonify(result = highchartdata(acisa, TimeString))
+
+
+@app.route('/_get_acisa')
+def get_acisa():
+	return jsonify(result = acisa_obj())
 
 
 @app.route('/nze')

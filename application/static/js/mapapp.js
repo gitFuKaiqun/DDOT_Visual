@@ -8,7 +8,7 @@ var extent, scale,
     reverse = false;
 scheme = colorbrewer[scheme_id][classes],
 container = L.DomUtil.get('map'),
-map = L.map(container).setView([38.902442, -77.036892], 10);
+map = L.map(container).setView([38.902442, -77.036892], 12);
 
 L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
     attribution: '<a href="http://content.stamen.com/dotspotting_toner_cartography_available_for_download">Stamen Toner</a>, <a href="http://www.openstreetmap.org/">OpenStreetMap</a>, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
@@ -25,7 +25,9 @@ var PtLayer = L.pointsLayer({}, {
     applyStyle: circle_style
 });
 
-drawMap(PtLayer, map, chart);
+function generateMapp() {
+    drawMap(PtLayer, map, chart);
+}
 
 //$.getJSON("_snap_form", {}).done(function(collection) {
 //    PtLayer._data = collection;
@@ -121,7 +123,7 @@ function timeseries_chart(color) {
         bottom: 40,
         left: 45
     },
-        width = 900 - margin.left - margin.right,
+        width = $(window).width() - margin.left - margin.right - 80,
         height = 80;
 
     var x = d3.time.scale(),
@@ -245,9 +247,12 @@ function timeseries_chart(color) {
 }
 
 function drawMap(PtLayer, map, chart){
+    var TRange = document.getElementById("reservationtime_mp").value;
+    var urlStr = "_snap_form?TRange=" + TRange;
+
     loading_indicator_trigger();
 
-    $.getJSON("_snap_form", {}).done(function(collection) {
+    $.getJSON(urlStr, {}).done(function(collection) {
         PtLayer._data = collection;
         PtLayer.onAdd(map);
 

@@ -1,13 +1,51 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block StaticFiles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loading_indicator.css') }}">
+<link href="{{ url_for('static', filename='css/daterangepicker-bs3.css') }}" rel="stylesheet" type="text/css" media="all" />
 
-{% block StaticFiles %}
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script src="http://code.highcharts.com/modules/exporting.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/loading_indicator.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loading_indicator.css') }}">
-    <script type="text/javascript" src='{{ url_for('static', filename='js/highChartZoom.js') }}'></script>
-{% endblock %}
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/moment.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/daterangepicker.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/loading_indicator.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/highChartZoom.js') }}"></script>
+<script>
+$(function() {
+    $.getJSON('/_get_acisa', {}, function(data) {
+        var ACISAs = data.result;
+        var select = document.getElementById("slct_acisa");
 
-{% block BodyContent %}
+        for(index in ACISAs) {
+            select.options[select.options.length] = new Option(ACISAs[index], index);
+        }
+    });
+})
+</script>
+{% endblock %} {% block BodyContent %}
+<h1>Time vs Volume</h1>
+<hr/>
+<h4>The Highchart</h4>
+<div class="well" style="overflow: auto">
+    <div class="input-group">
+        <label>Select Sensor No.: </label>
+        <select id="slct_acisa" class="form-control"></select>
+    </div>
+    <hr/>
+    <label>Select Datetime Range: </label>
+    <input type="text" style="width: 300px;" name="reservation" id="reservationtime" class="form-control" value="08/01/2013 1:00 PM - 08/01/2013 1:30 PM" class="span4" />
+    <hr/>
+    <button id="btn" class="btn btn-primary" type="button" onclick="generateChart();">Show Chart</button>
+    <hr/>
     <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            format: 'MM/DD/YYYY h:mm A'
+        }, function(start, end) {
+            console.log(start.toISOString(), end.toISOString());
+        });
+    });
+    </script>
+</div>
 {% endblock %}
